@@ -1,0 +1,42 @@
+.proposals-page h1 {
+  margin-bottom: 30px;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.file-input {
+  padding: 10px;
+  border: 2px dashed var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.file-info {
+  padding: 12px;
+  background: var(--bg-color);
+  border-radius: 6px;
+}
+
+.help-text {
+  margin-top: 12px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.table a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
