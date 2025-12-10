@@ -37,6 +37,10 @@ import CoordinatorStudents from './pages/coordinator/Students'
 import PanelDashboard from './pages/panel/Dashboard'
 import PanelEvaluations from './pages/panel/Evaluations'
 
+// HOD Pages
+import HodDashboard from './pages/hod/Dashboard'
+import HodMarks from './pages/hod/Marks'
+
 function App() {
   return (
     <Router>
@@ -111,6 +115,21 @@ function App() {
                     <Routes>
                       <Route path="dashboard" element={<PanelDashboard />} />
                       <Route path="evaluations" element={<PanelEvaluations />} />
+                    </Routes>
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+
+            {/* HOD Routes */}
+            <Route
+              path="/hod/*"
+              element={
+                <ProtectedRoute allowedRoles={['hod']}>
+                  <Layout>
+                    <Routes>
+                      <Route path="dashboard" element={<HodDashboard />} />
+                      <Route path="marks" element={<HodMarks />} />
                     </Routes>
                   </Layout>
                 </ProtectedRoute>

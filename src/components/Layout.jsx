@@ -2,6 +2,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { useNotifications } from '../contexts/NotificationContext'
 import './Layout.css'
+import Sidebar from '../pages/student/Sidebar'
+
+const isStudent = (user) => user && user.role === 'student'
 
 const Layout = ({ children }) => {
   const { user, logout } = useAuth()
@@ -42,8 +45,8 @@ const Layout = ({ children }) => {
         { path: '/panel/evaluations', label: 'Evaluations' }
       ],
       hod: [
-        { path: '/coordinator/dashboard', label: 'Dashboard' },
-        { path: '/coordinator/marks', label: 'Marks' }
+        { path: '/hod/dashboard', label: 'Dashboard' },
+        { path: '/hod/marks', label: 'Marks' }
       ]
     }
 
@@ -57,17 +60,19 @@ const Layout = ({ children }) => {
       <header className="header">
         <div className="header-content">
           <h1 className="logo">FYP Management System</h1>
-          <nav className="nav">
-            {navLinks.map(link => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={location.pathname === link.path ? 'active' : ''}
+          {!isStudent(user) && (
+            <nav className="nav">
+              {navLinks.map(link => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={location.pathname === link.path ? 'active' : ''}
               >
                 {link.label}
               </Link>
             ))}
           </nav>
+          )}
           <div className="header-actions">
             <div className="notifications-dropdown">
               <button className="notification-btn">
@@ -108,7 +113,18 @@ const Layout = ({ children }) => {
         </div>
       </header>
       <main className="main-content">
-        <div className="container">{children}</div>
+        {isStudent(user) ? (
+          <div className="container-fluid">
+            <div className="student-layout">
+              <Sidebar />
+              <div className="main-content-wrapper">
+                {children}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="container">{children}</div>
+        )}
       </main>
     </div>
   )
